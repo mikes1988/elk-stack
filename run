@@ -4,6 +4,7 @@ set -e
 
 # Run script for ELK stack
 
+# @TODO: This is a very naive check, of course our `docker run` could fail for other reasons...
 docker run -d -P --name elasticsearch -v $PWD/ubuntu-elasticsearch:/etc/elasticsearch mikes1988/ubuntu-elasticsearch ||\
 docker restart elasticsearch
 

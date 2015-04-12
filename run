@@ -4,7 +4,9 @@ set -e
 
 # Run script for ELK stack
 
-docker run -d -P --name elasticsearch -v $PWD/ubuntu-elasticsearch:/etc/elasticsearch mikes1988/ubuntu-elasticsearch
+docker run -d -P --name elasticsearch -v $PWD/ubuntu-elasticsearch:/etc/elasticsearch mikes1988/ubuntu-elasticsearch ||\
+docker restart elasticsearch
+
 kib=$(docker run -d -P --link elasticsearch:elasticsearch -v $PWD/ubuntu-kibana:/opt/kibana/config mikes1988/ubuntu-kibana)
 echo $kib
 docker run -d -P --link elasticsearch:elasticsearch -v $PWD/ubuntu-logstash/conf.d:/etc/logstash/conf.d mikes1988/ubuntu-logstash

@@ -25,3 +25,9 @@ If you trust me or can't be bothered building everything yourself you can just p
 * `docker pull mikes1988/ubuntu-elasticsearch`
 * `docker pull mikes1988/ubuntu-kibana`
 * `docker pull mikes1988/ubuntu-logstash`
+
+### Running
+
+* Either build or pull images
+* `./run`
+* Script will start up containers, and return the URL that Kibana frontend will be visible on.

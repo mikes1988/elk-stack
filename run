@@ -5,12 +5,12 @@ set -e
 # Run script for ELK stack
 
 # @TODO: This is a very naive check, of course our `docker run` could fail for other reasons...
-docker run -d --name elasticsearch -v $PWD/ubuntu-elasticsearch:/etc/elasticsearch mikes1988/ubuntu-elasticsearch ||\
+docker run --restart=always -d --name elasticsearch -v $PWD/ubuntu-elasticsearch:/etc/elasticsearch mikes1988/ubuntu-elasticsearch ||\
 docker restart elasticsearch
 
 kib=$(docker run -d -P --link elasticsearch:elasticsearch -v $PWD/ubuntu-kibana:/opt/kibana/config mikes1988/ubuntu-kibana)
 echo $kib
-docker run -d -P --link elasticsearch:elasticsearch -v $PWD/ubuntu-logstash/conf.d:/etc/logstash/conf.d mikes1988/ubuntu-logstash
+docker run -d -p=5000:5000 --link elasticsearch:elasticsearch -v $PWD/ubuntu-logstash/conf.d:/etc/logstash/conf.d mikes1988/ubuntu-logstash
 
 url=$(docker port $kib 5601 |cut -d: -f2)
 echo Kibana is visible through http://localhost:$url

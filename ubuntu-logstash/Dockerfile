@@ -12,4 +12,4 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
     
 EXPOSE 5000
 
-ENTRYPOINT /opt/logstash/bin/logstash agent -f /etc/logstash/conf.d/
+ENTRYPOINT /opt/logstash/bin/logstash -f /etc/logstash/conf.d/

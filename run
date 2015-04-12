@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+# Run script for ELK stack
+
+docker run -d -P --name elasticsearch -v $PWD/ubuntu-elasticsearch:/etc/elasticsearch mikes1988/ubuntu-elasticsearch
+kib=$(docker run -d -P --link elasticsearch:elasticsearch -v $PWD/ubuntu-kibana:/opt/kibana/config mikes1988/ubuntu-kibana)
+echo $kib
+docker run -d -P --link elasticsearch:elasticsearch -v $PWD/ubuntu-logstash/conf.d:/etc/logstash/conf.d mikes1988/ubuntu-logstash
+
+url=$(docker port $kib 5601 |cut -d: -f2)
+echo Kibana is visible through http://localhost:$url

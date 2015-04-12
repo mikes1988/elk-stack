@@ -1,4 +1,4 @@
-FROM ubuntu-java8
+FROM mikes1988/ubuntu-java8
 MAINTAINER Michael Edwards <mikes1988@gmail.com>
 
 RUN wget -O - http://packages.elasticsearch.org/GPG-KEY-elasticsearch |apt-key add -

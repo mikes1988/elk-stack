@@ -4,10 +4,13 @@ set -e
 
 # Build script for ELK stack
 
+repo=mikes1988
+
 # Update our ubuntu images.
 docker pull ubuntu
 
-docker build -t ubuntu-java8 ./ubuntu-java8
-docker build -t ubuntu-elasticsearch ./ubuntu-elasticsearch
-docker build -t ubuntu-kibana ./ubuntu-kibana
-docker build -t ubuntu-logstash ./ubuntu-logstash
+for t in ubuntu-java8 ubuntu-elasticsearch ubuntu-kibana ubuntu-logstash; do
+  docker build -t $repo/$t ./$t
+  docker push $repo/$t
+done
+
